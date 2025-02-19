@@ -4,7 +4,7 @@
   "scripts": {
     "start": "bun run --watch index.ts",
     "watch": "vite build --watch",
-    "dev": "bun watch & sleep 2 && bun start"
+    "dev": "bash -c 'bun watch & bun start'"
   },
   "dependencies": {
     "chokidar": "^4.0.3",
