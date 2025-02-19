@@ -1,0 +1,19 @@
+{
+  "name": "awbw-tools",
+  "version": "1.0.50",
+  "scripts": {
+    "start": "bun run --hot index.ts",
+    "watch": "vite build --watch",
+    "dev": "bun watch & sleep 2 && bun start"
+  },
+  "dependencies": {
+    "elysia": "latest"
+  },
+  "devDependencies": {
+    "solid-js": "^1.9.3",
+    "bun-types": "latest",
+    "vite": "^6.0.0",
+    "vite-plugin-solid": "^2.11.1"
+  },
+  "license": "MIT"
+}
