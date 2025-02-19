@@ -11,10 +11,8 @@
     "elysia": "latest"
   },
   "devDependencies": {
-    "solid-js": "^1.9.3",
     "bun-types": "latest",
-    "vite": "^6.0.0",
-    "vite-plugin-solid": "^2.11.1"
+    "vite": "^6.0.0"
   },
   "license": "MIT"
 }

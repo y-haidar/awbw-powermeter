@@ -1,14 +1,13 @@
 import { defineConfig } from 'vite';
-import solidPlugin from 'vite-plugin-solid';
 
 export default defineConfig({
-  plugins: [solidPlugin()],
+  plugins: [],
   // Do not use vite to start a dev server
   // server: {
   //   port: 3000,
   // },
   build: {
-    target: 'esnext',
+    target: 'ESNext',
     modulePreload: false,
     rollupOptions: {
       output: {

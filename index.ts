@@ -1,5 +1,4 @@
 import { Elysia } from "elysia";
-import { ListenCallback } from "elysia/dist/universal/server";
 import { ElysiaWS } from "elysia/dist/ws";
 import chokidar from 'chokidar';
 

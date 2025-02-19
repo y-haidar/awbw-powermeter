@@ -1,4 +1,4 @@
-declare module "*.txt.js" {
+declare module "*?raw" {
     var text: string;
     export = text;
 }
