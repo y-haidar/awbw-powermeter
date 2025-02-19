@@ -36,6 +36,8 @@ app.get('/live-reload.js', () => `
 app.ws(`/live-reload`, {
   open: (ws) => {
     globalThis.ws = ws
+    const file = Bun.file("./dist/script.js");
+    file.text().then((v) => { ws.send(v); });
   }
 })
 
