@@ -9,13 +9,14 @@ export default defineConfig({
   // },
   build: {
     target: 'esnext',
-    // rollupOptions: {
-    //   output: {
-    //     // manualChunks: false,
-    //     inlineDynamicImports: true,
-    //     // entryFileNames: 'script.js',   // currently does not work for the legacy bundle
-    //     // assetFileNames: '[name].[ext]', // currently does not work for images
-    //   },
-    // }
+    modulePreload: false,
+    rollupOptions: {
+      output: {
+        // manualChunks: false,
+        inlineDynamicImports: true,
+        entryFileNames: 'script.js',   // currently does not work for the legacy bundle
+        // assetFileNames: '[name].[ext]', // currently does not work for images
+      },
+    }
   },
 });

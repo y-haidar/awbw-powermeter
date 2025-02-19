@@ -3,9 +3,10 @@ import { Elysia } from "elysia";
 import { ListenCallback } from "elysia/dist/universal/server";
 import { ElysiaWS } from "elysia/dist/ws";
 // @ts-ignore
-import text from "./dist/script.js" with {type: "text"}
+// import text from "./dist/script.js" with {type: "text"}
 // import { } from "./src/index.tsx" with {type: "text"}
 // import { watchFile } from 'node:fs';
+import chokidar from 'chokidar';
 // import open from 'open';
 
 // const text = import("./tools.txt", { with: { type: "text" } });
@@ -41,10 +42,14 @@ app.get('/live-reload.js', () => `
       //       console.log('========== Loaded ==========');
       //     })
       // }
-      const element = document.getElementById("yh-script");
-      element.remove();
+      let yhscript_old = document.getElementById("yh-script");
+      yhscript_old.remove();
+      const yhroot = document.getElementById("yh-root");
+      if (yhroot) yhroot.remove();
+
       let script = document.createElement('script') ;
       script.id = "yh-script";
+      script.type = "module";
       script.textContent = msg.data;
       document.head.appendChild(script);
       console.log('========== Loaded ==========');
@@ -59,11 +64,23 @@ app.ws(`/live-reload`, {
   }
 })
 
-// const file = Bun.file("src/tools.js");
-// let text = await file.text();
+let is_debounced = false;
 
-// watchFile("src/tools.js", async () => {
-//   const file = Bun.file("src/tools.js");
+chokidar.watch('./dist/script.js', { usePolling: true }).on('change', (event, path) => {
+  console.log(event);
+  if (!is_debounced) {
+    is_debounced = true;
+    setTimeout(() => {
+      is_debounced = false;
+      const file = Bun.file("./dist/script.js");
+      file.text().then((v) => { if (globalThis.ws) globalThis.ws.send(v); });
+    }, 100)
+  }
+});
+
+
+// watchFile("./dist/script.js", async () => {
+//   const file = Bun.file("./dist/script.js");
 //   text = await file.text();
 //   if (globalThis.ws) globalThis.ws.send(text);
 // });
@@ -75,7 +92,7 @@ const callback: ListenCallback = async ({ hostname, port, }) => {
   }
 
   // if (globalThis.ws) globalThis.ws.send('live-reload')
-  if (globalThis.ws) globalThis.ws.send(text);
+  // if (globalThis.ws) globalThis.ws.send(text);
 }
 
 app.listen(8088, callback);

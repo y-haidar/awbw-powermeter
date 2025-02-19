@@ -1,7 +1,9 @@
 /* @refresh reload */
 import { render } from 'solid-js/web';
 
-// const root = document.getElementById('root');
+let yhroot = document.createElement('div');
+yhroot.id = "yh-root"
+document.querySelector('div#calculator > header')?.appendChild(yhroot);
 
 // if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 //     throw new Error(
@@ -9,6 +11,7 @@ import { render } from 'solid-js/web';
 //     );
 // }
 
-// render(() => <><h1>Hello world!!!!</h1></>, root!);
+render(() => <>Hello world!!!!</>, yhroot!);
 
-console.log("unitsInfo ===  test2");
+console.log("unitsInfo ===  3");
+// console.log(unitsInfo);
