@@ -1,0 +1,37 @@
+<div id="yh-root" :style="'position: relative; height: 0; middle-alig;'+rootStyle">
+    <div style="background: white; border: 1px solid black;">
+        <div :style="containerStyle">
+            <div id="yh-calcInfos-list" style="height: 100px; overflow-y: scroll;  padding-inline: 6px; padding-block: 6px;">
+                <div style="display: flex; gap: 30px; justify-content: space-between;" v-for="(item, index) in items">
+                    <div style="display: flex; gap: 5px;">
+                        <!-- <input :id="'yh-calcInfo-'+index" title="select" type="checkbox" name="select"></input> -->
+                        <label :for="'yh-calcInfo-'+index" style="font-size: 12px;" :title="item[1]">{{ items.length - index }} - {{ item[0] }}</label>
+                    </div>
+                    <!-- <button><img title="Clicking should fill calc" src="terrain/zoomin.gif"></button> -->
+                </div>
+            </div>
+            <!-- <div style="display: flex; justify-content: space-between;">
+                <div>Total Power</div>
+            </div> -->
+        </div>
+        <div style="display: flex; white-space: nowrap; justify-content: space-between; padding: 6px; border-top: 1px solid black;">
+            <input @click="addToList" title="Add" class="submit" type="button" name="add" value="+" style="background-color: rgb(191, 237, 255); color: rgb(1, 30, 63); font-weight: bold; cursor: pointer;">
+            <div style="display: flex; overflow: hidden; gap: 5px; justify-content: space-between; align-items: center; font-size: 14px;">
+                <div :title="'Attaker Power Gain: '+totalAtkPMGain()" style="overflow: hidden; text-overflow: ellipsis;">Atk: {{totalAtkPMGain()}}</div>
+                <div :title="'Defender Power Gain: '+totalDefPMGain()" style="overflow: hidden; text-overflow: ellipsis;">Def: {{totalDefPMGain()}}</div>
+            </div>
+            <!-- <div style="display: flex;">
+                <input title="Select All" type="checkbox" name="select-all"></input>
+                <div>{{ count }}</div>
+            </div>
+            <div title="Clear Selected" style="height: 20px; overflow: clip;">
+                <img style="transform: scale(.9); transform-origin: 0 0;" src="terrain/ani/missilesilo.gif"></img>
+            </div> -->
+            <div style="display: flex; gap: 5px;">
+                <input @click="clearList" title="Clear" class="submit" type="button" name="clear" value="x" style="background-color: rgb(191, 237, 255); color: rgb(1, 30, 63); font-weight: bold; cursor: pointer;">
+                <!-- <label title="PowerMeter" for="yh-toggle-pm">PM</label> -->
+                <input @click="togglePm" id="yh-toggle-pm" type="checkbox" name="toggle-table" v-bind:checked="isVisible"></input>
+            </div>
+        </div>
+    </div>
+</div>

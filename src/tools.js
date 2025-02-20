@@ -1,4 +1,4 @@
 // This tests access of objects that exist in the moveplanner page in awbw
-console.log(unitsInfo);
+// console.log(unitsInfo);
 
 export default "";
