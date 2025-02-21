@@ -13,10 +13,11 @@ export const PowerMeterCalc = () => new Vue({
         isVisible: false,
         containerStyle: "display: none;",
         rootStyle: NOT_VISIBLE,
+        keysPressed: {},
     }},
     template: text,
     methods: {
-        addToList: function addToList(e) {
+        addToList: function(e) {
             const calcInfo = JSON.parse(sessionStorage.calculator);
             this.calcInfos.push(calcInfo);
             this.dmgInfos.push(calculator.$data.damage);
@@ -30,7 +31,7 @@ export const PowerMeterCalc = () => new Vue({
 Defender Power Gain: ${JSON.stringify(defPMGain(calculator.$data.damage))}`;
             this.items.unshift([display_str, title_str]);
         },
-        togglePm: function togglePm(e) {
+        togglePm: function(e) {
             this.isVisible = !this.isVisible;
             // This is disgusting, sorry
             if (this.isVisible) {
@@ -42,19 +43,35 @@ Defender Power Gain: ${JSON.stringify(defPMGain(calculator.$data.damage))}`;
             }
             e.preventDefault();
         },
-        clearList: function clearList(e) {
+        clearList: function(e) {
             this.items = [];
             this.calcInfos = [];
             this.dmgInfos = [];
         },
-        totalAtkPMGain: function totalAtkPMGain() {
+        totalAtkPMGain: function() {
             const total = this.dmgInfos.reduce((acc, v) => atkPMGain(v, acc), [0, 0]);
             return JSON.stringify(total);
         },
-        totalDefPMGain: function totalDefPMGain() {
+        totalDefPMGain: function() {
             const total = this.dmgInfos.reduce((acc, v) => defPMGain(v, acc), [0, 0]);
             return JSON.stringify(total);
         },
+    },
+    mounted: function() {
+        document.addEventListener('keydown', (e) => {
+            let el = document.getElementsByClassName('calc-content');
+            if (el.length === 0) {
+                return;
+            }
+            
+            if (e.key == 'X') {
+                this.calcInfos.shift();
+                this.dmgInfos.shift();
+                this.items.shift();
+            } else if (e.key == 'x') {
+                this.addToList();
+            }
+         });
     }
 });
 
