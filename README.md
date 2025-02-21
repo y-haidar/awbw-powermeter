@@ -1,35 +1,55 @@
-# Elysia with Bun runtime
+# AWBW PowerMeter Sheet
 
-## Getting Started
-To get started with this template, simply paste this command into your terminal:
-```bash
-bun create elysia ./elysia-example
-```
+A quick way to calculate the total powermeter gain from multiple engagements. The script have two hotkeys:
 
-## Development
-To start the development server run:
-```bash
-bun run dev
-```
+- <kbd>x</kbd> for adding the engagement to the list.
+- <kbd>x</kbd> + <kbd>Shift</kbd> for removing the last engagement from the list.
 
-Open http://localhost:3000/ with your browser to see the result.
+![demo showing expanded view with a tooltip visible](assets/image_demo1.png)
+![demo showing unexpanded view](assets/image_demo2.png)
 
+# Tampermonkey scripts hot reload
 
-# Tampermonkey Side
+This is an experiment and a demo to explore live reloading for tampermonkey scripts. Run `bun run dev` to start.
+
+## Tampermonkey Side
 
 ```js
 // ==UserScript==
 // @name         Scratchpad-LiveReload
 // @namespace    https://awbw.amarriner.com/
-// @version      2025-02-11
-// @description  TODO: add description, and rename
+// @version      0.1
+// @description  This is an experiment and a demo to explore live reloading for tampermonkey scripts.
 // @author       yhaidar
 // @match        https://awbw.amarriner.com/game.php?games_id=*
 // @match        https://awbw.amarriner.com/moveplanner.php?*
 // @icon         https://awbw.amarriner.com/favicon.ico
 // @require      http://localhost:8088/live-reload.js
-// @grant        unsafeWindow
-// @run-at document-idle
-// @license MIT
+// @grant        none
+// @run-at       document-idle
+// @license      MIT
 // ==/UserScript==
+
+```
+
+## Install
+
+Run `bun run build` and copy the generated `dist/script.js` file into tampermonkey like so:
+
+```js
+// ==UserScript==
+// @name         AWBW PowerMeter Sheet
+// @namespace    https://awbw.amarriner.com/
+// @version      0.1
+// @description  A quick way to calculate the total powermeter gain from multiple engagements.
+// @author       yhaidar
+// @match        https://awbw.amarriner.com/game.php?games_id=*
+// @match        https://awbw.amarriner.com/moveplanner.php?*
+// @icon         https://awbw.amarriner.com/favicon.ico
+// @grant        none
+// @run-at       document-idle
+// @license      MIT
+// ==/UserScript==
+
+// Copy the content of "dist/script.js" here
 ```

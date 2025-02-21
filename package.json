@@ -4,6 +4,7 @@
   "scripts": {
     "start": "bun run --watch index.ts",
     "watch": "vite build --watch",
+    "build": "vite build",
     "dev": "bash -c 'bun watch & bun start'"
   },
   "dependencies": {
